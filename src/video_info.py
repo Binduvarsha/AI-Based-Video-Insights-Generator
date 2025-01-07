@@ -6,7 +6,6 @@ import re
 class GetVideo:
     @staticmethod
     def Id(link):
-        """Extracts the video ID from a YouTube video link."""
         if "youtube.com" in link:
             pattern = r'youtube\.com/watch\?v=([a-zA-Z0-9_-]+)'
             video_id = re.search(pattern, link).group(1)
@@ -20,7 +19,6 @@ class GetVideo:
 
     @staticmethod
     def title(link):
-        """Gets the title of a YouTube video."""
         r = requests.get(link) 
         s = BeautifulSoup(r.text, "html.parser") 
         try:
@@ -32,7 +30,6 @@ class GetVideo:
         
     @staticmethod
     def transcript(link):
-        """Gets the transcript of a YouTube video."""
         video_id = GetVideo.Id(link)
         try:
             transcript_dict = YouTubeTranscriptApi.get_transcript(video_id)
@@ -43,7 +40,6 @@ class GetVideo:
 
     @staticmethod
     def transcript_time(link):
-        """Gets the transcript of a YouTube video with timestamps."""
         video_id = GetVideo.Id(link)
         try:
             transcript_dict = YouTubeTranscriptApi.get_transcript(video_id)
